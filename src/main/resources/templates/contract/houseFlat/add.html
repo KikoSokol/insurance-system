@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>New House and Flat insurance</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+        }
+        .mdc-list {
+            display: flex;
+            flex-direction: column;
+        }
+        .mdc-drawer__header {
+            padding: 10px;
+        }
+        .mdc-list-item {
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+        }
+        .mdc-list-item__text {
+            padding-left: 10px;
+        }
+        .mdc-drawer {
+            border-right-color: rgba(0,0,0,.12);
+            border-right-style: solid;
+            width: 10%;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+<aside class="mdc-drawer">
+    <div class="mdc-drawer__header">
+        <h3 class="mdc-drawer__title">Insurance System</h3>
+        <h4 class="mdc-drawer__title">OOP zadanie 3</h4>
+        <h5 class="mdc-drawer__title">Kristián sokol</h5>
+        <h6 class="mdc-drawer__subtitle">Java + Spring</h6>
+    </div>
+    <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+            <a class="mdc-list-item" href="/user/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">people</i>
+                <span class="mdc-list-item__text">Users</span>
+            </a>
+            <a class="mdc-list-item" href="/contract/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">reorder</i>
+                <span class="mdc-list-item__text">Contrats</span>
+            </a>
+        </nav>
+    </div>
+</aside>
+<div style="display: flex; flex-direction: column; width: 100%; overflow: auto">
+    <h1 style="margin: 10px;">NEW HOUSE AND FLAT INSURANCE</h1>
+    <form action="#" th:action="@{/contract/houseFlatInsurance/add}" th:object="${newHouseFlatInsurance}" method="post">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <select class="mdl-textfield__input" name="insurer" id="insurer">
+                <option th:each="insurer: ${userHouseFlatInsurance.values()}" th:value="${insurer.idUser}" th:text="${insurer.userInfo}" th:selected="${insurer.idUser==newHouseFlatInsurance.insurer}"></option>
+            </select>
+            <label class="mdl-textfield__label" for="insurer">Insurer</label>
+            <p th:if="${#fields.hasErrors('insurer')}" th:errors="*{insurer}"></p><br>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label for="startOfInsurance">Date of start insurance</label>
+            <input class="mdl-textfield__input" type="datetime-local" id="startOfInsurance" name="startOfInsurance" th:field="*{startOfInsurance}" /></p>
+            <p th:if="${#fields.hasErrors('startOfInsurance')}" th:errors="*{startOfInsurance}"></p><br>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label for="endOfInsurance">Date of end insurance</label>
+            <input class="mdl-textfield__input" type="datetime-local" id="endOfInsurance" name="endOfInsurance" th:field="*{endOfInsurance}" /></p>
+            <p th:if="${#fields.hasErrors('endOfInsurance')}" th:errors="*{endOfInsurance}"></p><br>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__output" for="amountOfInsuranceIndemnity">Amount of insurance indemnity</label>
+            <input class="mdl-textfield__input" type="number" step="any" id="amountOfInsuranceIndemnity" th:field="*{amountOfInsuranceIndemnity}" /></p>
+            <p th:if="${#fields.hasErrors('amountOfInsuranceIndemnity')}" th:errors="*{amountOfInsuranceIndemnity}"></p><br>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__output" for="monthlyPayment">Monthly payment</label>
+            <input class="mdl-textfield__input" type="number" step="any" id="monthlyPayment" th:field="*{monthlyPayment}" /></p>
+            <p th:if="${#fields.hasErrors('monthlyPayment')}" th:errors="*{monthlyPayment}"></p><br>
+        </div>
+
+
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <label class="mdl-textfield__label" for="propertyType">Property type</label>
+            <select class="mdl-textfield__input" name="propertyType" id="propertyType">
+                <option th:each="propertyType: ${propertyTypeInsurance}"
+                        th:value="${propertyType}"
+                        th:selected="${propertyType.equals(newHouseFlatInsurance.getPropertyType())}"
+                        th:text="${propertyType.getName()}"></option>
+            </select>
+            <p th:if="${#fields.hasErrors('propertyType')}" th:errors="*{propertyType}"></p><br>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__output" for="valueOfProperty">Value of property</label>
+            <input class="mdl-textfield__input" type="number" step="any" id="valueOfProperty" th:field="*{valueOfProperty}" /></p>
+            <p th:if="${#fields.hasErrors('valueOfProperty')}" th:errors="*{valueOfProperty}"></p><br>
+        </div>
+
+        <div class="mdl-textfield mdl-js-textfield">
+            <label for="garageInsurance">Insurance of garage</label>
+            <input type="checkbox" id="garageInsurance" th:field="*{garageInsurance}"/>
+            <br>
+        </div>
+
+        <h5>Address</h5>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__output" for="street">Street</label>
+            <input class="mdl-textfield__input" type="text" id="street" th:field="*{street}" /></p>
+            <p th:if="${#fields.hasErrors('street')}" th:errors="*{street}"></p><br>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__output" for="numberOfHouse">Number of house</label>
+            <input class="mdl-textfield__input" type="number" id="numberOfHouse" th:field="*{numberOfHouse}" /></p>
+            <p th:if="${#fields.hasErrors('numberOfHouse')}" th:errors="*{numberOfHouse}"></p><br>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__output" for="city">City</label>
+            <input class="mdl-textfield__input" type="text" id="city" th:field="*{city}" /></p>
+            <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p><br>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield">
+            <label class="mdl-textfield__output" for="postalCode">Postal code</label>
+            <input class="mdl-textfield__input" type="text" id="postalCode" th:field="*{postalCode}" /></p>
+            <p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></p><br>
+        </div>
+
+        <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised" style="width: fit-content;"/>
+    </form>
+</div>
+</body>
+</html>
+

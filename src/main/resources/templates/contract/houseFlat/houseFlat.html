@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>House and Flat insurance</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+        }
+
+        .mdc-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mdc-drawer__header {
+            padding: 10px;
+        }
+
+        .mdc-list-item {
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+        }
+
+        .mdc-list-item__text {
+            padding-left: 10px;
+        }
+
+        .mdc-drawer {
+            border-right-color: rgba(0, 0, 0, .12);
+            border-right-style: solid;
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+<aside class="mdc-drawer">
+    <div class="mdc-drawer__header">
+        <h3 class="mdc-drawer__title">Insurance System</h3>
+        <h4 class="mdc-drawer__title">OOP zadanie 3</h4>
+        <h5 class="mdc-drawer__title">Kristián sokol</h5>
+        <h6 class="mdc-drawer__subtitle">Java + Spring</h6>
+    </div>
+    <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+            <a class="mdc-list-item" href="/user/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">people</i>
+                <span class="mdc-list-item__text">Users</span>
+            </a>
+            <a class="mdc-list-item" href="/contract/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">reorder</i>
+                <span class="mdc-list-item__text">Contrats</span>
+            </a>
+        </nav>
+    </div>
+</aside>
+<div style="display: flex; flex-direction: column; width: 100%; overflow: auto">
+    <h1 style="margin: 10px;"> HOUSE AND FLAT INSURANCE</h1>
+    <ul class="demo-list-item mdl-list">
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>CONTRACT ID:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.idContract}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of formation:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.dateTimeOfFormation}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of start:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.startOfInsurance}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of end:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.endOfInsurance}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Amount of insurance indemnity:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.amountOfInsuranceIndemnity}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Monthly payment:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.monthlyPayment}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Property type:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.propertyType}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Value of property:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.valueOfProperty}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Garage insurance:&nbsp;</span>
+                <span th:text="${houseFlatInsurance.garageInsurance}"></span>
+            </span>
+        </li>
+
+
+        <a th:href="@{'/contract/update/id/' + ${houseFlatInsurance.idContract}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+            <i class="material-icons">edit</i>
+        </a>
+
+    </ul>
+
+    <h5 style="margin: 10px;" >Insurer</h5>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 10px">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">ID</th>
+            <th class="mdl-data-table__cell--non-numeric">Name</th>
+            <th class="mdl-data-table__cell--non-numeric">Personal number</th>
+            <th class="mdl-data-table__cell--non-numeric">Email</th>
+            <th class="mdl-data-table__cell--non-numeric">Permanent address</th>
+            <th class="mdl-data-table__cell--non-numeric">Corespondence address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/id/' + ${insurerHouseFlatInsurance.idUser}}" th:text="${insurerHouseFlatInsurance.idUser}"></a>
+        </td>
+        <td th:text="${insurerHouseFlatInsurance.name} + ' ' + ${insurerHouseFlatInsurance.surname}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerHouseFlatInsurance.personalNumber.personalNumber}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerHouseFlatInsurance.email}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerHouseFlatInsurance.addressOfPermanentResidence}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerHouseFlatInsurance.addressOfCorespondence}" class="mdl-data-table__cell--non-numeric"></td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/id/' + ${insurerHouseFlatInsurance.idUser}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+                <i class="material-icons">search</i>
+            </a>
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/update/' + ${insurerHouseFlatInsurance.idUser}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+                <i class="material-icons">edit</i>
+            </a>
+        </td>
+        </tbody>
+    </table>
+
+    <h5 style="margin: 10px;" >Address</h5>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 10px">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Street</th>
+            <th class="mdl-data-table__cell--non-numeric">Number of house</th>
+            <th class="mdl-data-table__cell--non-numeric">City</th>
+            <th class="mdl-data-table__cell--non-numeric">Postal code</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <td th:text="${houseFlatInsurance.address.nameOfStreet}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${houseFlatInsurance.address.numberOfHouse}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${houseFlatInsurance.address.nameOfCity}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${houseFlatInsurance.address.postalCode.postalCode}" class="mdl-data-table__cell--non-numeric"></td>
+
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

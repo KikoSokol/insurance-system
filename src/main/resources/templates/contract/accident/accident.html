@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Accident insurance</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-orange.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+        }
+
+        .mdc-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mdc-drawer__header {
+            padding: 10px;
+        }
+
+        .mdc-list-item {
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            text-decoration: none;
+        }
+
+        .mdc-list-item__text {
+            padding-left: 10px;
+        }
+
+        .mdc-drawer {
+            border-right-color: rgba(0, 0, 0, .12);
+            border-right-style: solid;
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+<aside class="mdc-drawer">
+    <div class="mdc-drawer__header">
+        <h3 class="mdc-drawer__title">Insurance System</h3>
+        <h4 class="mdc-drawer__title">OOP zadanie 3</h4>
+        <h5 class="mdc-drawer__title">Kristián sokol</h5>
+        <h6 class="mdc-drawer__subtitle">Java + Spring</h6>
+    </div>
+    <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+            <a class="mdc-list-item" href="/user/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">people</i>
+                <span class="mdc-list-item__text">Users</span>
+            </a>
+            <a class="mdc-list-item" href="/contract/">
+                <i class="material-icons mdc-list-item__graphic" aria-hidden="true">reorder</i>
+                <span class="mdc-list-item__text">Contrats</span>
+            </a>
+        </nav>
+    </div>
+</aside>
+<div style="display: flex; flex-direction: column; width: 100%; overflow: auto">
+    <h1 style="margin: 10px;"> ACCIDENT INSURANCE</h1>
+    <ul class="demo-list-item mdl-list">
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>CONTRACT ID:&nbsp;</span>
+                <span th:text="${accidentInsurance.idContract}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of formation:&nbsp;</span>
+                <span th:text="${accidentInsurance.dateTimeOfFormation}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of start:&nbsp;</span>
+                <span th:text="${accidentInsurance.startOfInsurance}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Date of end:&nbsp;</span>
+                <span th:text="${accidentInsurance.endOfInsurance}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Amount of insurance indemnity:&nbsp;</span>
+                <span th:text="${accidentInsurance.amountOfInsuranceIndemnity}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Monthly payment:&nbsp;</span>
+                <span th:text="${accidentInsurance.monthlyPayment}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Sum insured of lasting consequences: </span>
+                <span th:text="${accidentInsurance.sumInsuredOfLastingConsequences}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Sum insured of death:&nbsp;</span>
+                <span th:text="${accidentInsurance.sumInsuredOfDeath}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Sum insured of daily compensation:&nbsp;</span>
+                <span th:text="${accidentInsurance.sumInsuredOfDailyCompensation}"></span>
+            </span>
+        </li>
+        <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                <span>Territorial validity:&nbsp;</span>
+                <span th:text="${accidentInsurance.territorialValidity}"></span>
+            </span>
+        </li>
+
+
+
+        <a th:href="@{'/contract/update/id/' + ${accidentInsurance.idContract}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+            <i class="material-icons">edit</i>
+        </a>
+
+    </ul>
+
+    <h5 style="margin: 10px;" >Insurer</h5>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 10px">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">ID</th>
+            <th class="mdl-data-table__cell--non-numeric">Name</th>
+            <th class="mdl-data-table__cell--non-numeric">Personal number</th>
+            <th class="mdl-data-table__cell--non-numeric">Email</th>
+            <th class="mdl-data-table__cell--non-numeric">Permanent address</th>
+            <th class="mdl-data-table__cell--non-numeric">Corespondence address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/id/' + ${insurerAccidentInsurance.idUser}}" th:text="${insurerAccidentInsurance.idUser}"></a>
+        </td>
+        <td th:text="${insurerAccidentInsurance.name} + ' ' + ${insurerAccidentInsurance.surname}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerAccidentInsurance.personalNumber.personalNumber}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerAccidentInsurance.email}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerAccidentInsurance.addressOfPermanentResidence}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insurerAccidentInsurance.addressOfCorespondence}" class="mdl-data-table__cell--non-numeric"></td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/id/' + ${insurerAccidentInsurance.idUser}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+                <i class="material-icons">search</i>
+            </a>
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/update/' + ${insurerAccidentInsurance.idUser}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+                <i class="material-icons">edit</i>
+            </a>
+        </td>
+        </tbody>
+    </table>
+
+    <h5 style="margin: 10px;" >Insured</h5>
+
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table mdl-shadow--2dp" style="margin: 10px">
+        <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">ID</th>
+            <th class="mdl-data-table__cell--non-numeric">Name</th>
+            <th class="mdl-data-table__cell--non-numeric">Personal number</th>
+            <th class="mdl-data-table__cell--non-numeric">Email</th>
+            <th class="mdl-data-table__cell--non-numeric">Permanent address</th>
+            <th class="mdl-data-table__cell--non-numeric">Corespondence address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/id/' + ${insuredAccidentInsurance.idUser}}" th:text="${insuredAccidentInsurance.idUser}"></a>
+        </td>
+        <td th:text="${insuredAccidentInsurance.name} + ' ' + ${insuredAccidentInsurance.surname}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insuredAccidentInsurance.personalNumber.personalNumber}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insuredAccidentInsurance.email}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insuredAccidentInsurance.addressOfPermanentResidence}" class="mdl-data-table__cell--non-numeric"></td>
+        <td th:text="${insuredAccidentInsurance.addressOfCorespondence}" class="mdl-data-table__cell--non-numeric"></td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/id/' + ${insuredAccidentInsurance.idUser}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+                <i class="material-icons">search</i>
+            </a>
+        </td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <a th:href="@{'/user/update/' + ${insuredAccidentInsurance.idUser}}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" style="margin: 10px; min-height: 40px">
+                <i class="material-icons">edit</i>
+            </a>
+        </td>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
